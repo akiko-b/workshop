@@ -21,6 +21,6 @@ def predict(filename, featuresize):
 #画像を判定
 #img_path = 'elephant.jpg'
 #results = predict(img_path, 3)
-results = predict(args[1], args[2])
+results = predict(args[1], 3)
 for result in results:
     print(result)
