@@ -21,13 +21,14 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 | 緑 | 10番 RX |
 | 赤 | どこにも刺さない |
 
-<img src="image/rasp_pin.png" width="80%">
+<img src="image/rasp_pin.PNG" width="80%">
 
 **PC側**
 
 　　USBコネクターをPCのUSBポートに接続する。
 
 <br>
+
 ## 1.3. ターミナル接続（Tera Term）
 
 
@@ -38,14 +39,15 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 <br>
 - PC上のターミナルソフトを開き、シリアル通信のポート番号を選択する。
 
-<img src="image/TeraTerm1.png" width="60%">
+<img src="image/TeraTerm1.PNG" width="60%">
 
 <br>
 - Setup -> Serial port：　ボーレートを115200に設定する。
 
-<img src="image/TeraTerm2.png" width="60%">
+<img src="image/TeraTerm2.PNG" width="60%">
 
 <br>
+
 ## 1.4. Raspberry Piの起動
 
 - SDカードをRaspberry Pi本体に挿し込む
@@ -54,7 +56,7 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 
 Raspberry Pi本体には電源スイッチはありません。電源をつなぐと起動します。
 
-<img src="image/TeraTerm3.png" width="60%">
+<img src="image/TeraTerm3.PNG" width="60%">
 
 Raspbianの場合はユーザ：pi、パスワード：raspberryがデフォルト設定です。
 

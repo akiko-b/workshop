@@ -122,7 +122,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
     ip a
 
 
-<img src="image/ip.png" width="60%">
+<img src="image/ip.PNG" width="60%">
 
 - WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスすることでカメラからの配信画像を見ることができる。　例：http://192.168.xx.xx:9000  
 
@@ -420,6 +420,5 @@ raspicam_cvライブラリを使用すると、OpenCVから簡単にRaspberryPi�
 - Raspbianをシャットダウンする。
 
     sudo shutdown -h now
-
 
 - SDカードのアクセス(緑LED点灯)が消えたら、電源を切る。

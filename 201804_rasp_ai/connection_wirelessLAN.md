@@ -3,7 +3,6 @@
 ## 1.1. SDカード上のファイルの編集
 SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下に中身が空の`ssh`ファイルと、下記の内容の`wpa_supplicant.conf`ファイルを置く。使用する無線LAN環境に合わせてSSID名とパスワードの箇所を変える。
 
-
     country=GB
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
     update_config=1
@@ -15,6 +14,7 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 
 
 <br>
+
 ## 1.2. Raspberry Piの起動
 
 - SDカードをRaspberry Pi本体に挿し込む
@@ -24,6 +24,7 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 Raspberry Pi本体には電源スイッチはありません。電源をつなぐと起動します。
 
 <br>
+
 ## 1.3. IPアドレスの確認
 
 下記の a) または b) の方法でIPアドレスを確認する。
@@ -65,6 +66,7 @@ Raspberry Pi本体には電源スイッチはありません。電源をつな�
 
 
 <br>
+
 ## 1.4. ターミナル接続（Tera Term）
 
 PC上のターミナルソフトを開き、調べたIPアドレスを入力して接続する。
