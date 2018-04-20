@@ -21,9 +21,8 @@ while True:
     preds = model.predict(x)
     #print('Predicted:', decode_predictions(preds, top=3)[0])
 
-    #https://github.com/karaage0703/tensorflow-pi/blob/master/inspect_camera_pi.py
     print('***********************************')
     for p in decode_predictions(preds, top=5)[0]:
-            print("Score {}, Label {}".format(p[2], p[1]))
+            print("[Score] {}, [Label] {}".format(p[2], p[1]))
     time.sleep(3)
     #count = 0
