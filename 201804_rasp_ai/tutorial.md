@@ -16,6 +16,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 <img src="image/rasp-camera1.jpg" width="30%">
 
 <br>
+
 ## 1.2. Raspberry Pi3とパソコンを接続する
 
 - [USB-シリアルケーブルで接続する場合](connection_uart.md)
@@ -23,6 +24,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 - [無線LANで接続する場合](connection_wirelessLAN.md)
 
 <br>
+
 ## 1.3. raspi-configの設定
 
     sudo raspi-config
@@ -39,12 +41,12 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 その後、画面の指示通りrebootする。
 
 <br>
+
 # 2. カメラ画像の配信
 
 ## 2.1. ストリーミング配信プログラム(mjpg-streamer)のインストール
 
 - Pi Cameraがアクティブになっているか確認する。
-
 
     vcgencmd get_camera
 
@@ -53,13 +55,11 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 - Raspbianのパッケージをアップデートする
 
-
     sudo apt-get update
     sudo apt-get upgrade
 
 
 - ストリーミング配信プログラム(mjpg-streamer)をインストールする。
-
 
     sudo apt-get install -y libjpeg9-dev cmake
     sudo git clone https://github.com/jacksonliam/mjpg-streamer.git mjpg-streamer
@@ -71,13 +71,13 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 上記１行目で「You might want to run 'apt --fix-broken install' to correct these.」というエラーメッセージが出た場合は
 
-
     sudo apt --fix-broken install
 
 
 を実行した後、もう一度１行目から実行する。
 
 <br>
+
 ## 2.2. mjpg-streamer起動スクリプトの作成
 
 - `nano start_stream.sh`と打ってnanoエディタを開き、下記の内容をコピーして保存終了する。
@@ -108,6 +108,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 
 <br>
+
 ## 2.3. mjpg-streamerの動作確認
 
 - 下記コマンドを実行し、mjpg-streamerを起動する。
@@ -133,6 +134,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 <img src="image/kill.PNG" width="50%">
 
 <br>
+
 # 3. MNIST文字認識の実装
 
 ## 3.1. 「ゼロから作るDeep Learning」のサンプルコードの入手
@@ -147,6 +149,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 
 <br>
+
 ## 3.2. カメラを使ったMNIST文字認識プログラムの実装
 
 - 下記コマンドを実行し、mjpg-streamerを起動する。
@@ -177,6 +180,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 
 <br>
+
 # 4. Kerasによる物体識別の実装
 
 ## 4.1. スワップ領域の拡大
@@ -205,6 +209,7 @@ CONF_MAXSIZE=2048の箇所の数字を8192に変更、コメントアウト外�
     free -h
 
 <br>
+
 ## 4.2. TensorFlowのインストール
 
 - pipを開発バージョンにアップデート
@@ -233,6 +238,7 @@ https://github.com/pypa/pip/issues/4110#issuecomment-342373982
 
 
 <br>
+
 ## 4.3. TensorFlow動作テスト
 
 
@@ -241,6 +247,7 @@ https://github.com/pypa/pip/issues/4110#issuecomment-342373982
 
 
 <br>
+
 ## 4.4. Kerasのインストール
 
 
@@ -255,6 +262,7 @@ https://github.com/pypa/pip/issues/4110#issuecomment-342373982
 
 
 <br>
+
 ## 4.5. Kerasによる物体識別１
 
 - 物体識別のソースコードをダウンロードする。
@@ -282,6 +290,7 @@ https://github.com/pypa/pip/issues/4110#issuecomment-342373982
 最初の実行時にはDownloading data from..のメッセージとともにh5ファイルとjsonファイルがダウンロードされる。
 
 <br>
+
 ## 4.6. Kerasによる物体識別２
 
 - 下記コマンドを実行し、mjpg-streamerを起動する。
@@ -405,6 +414,7 @@ raspicam_cvライブラリを使用すると、OpenCVから簡単にRaspberryPi�
 
 
 <br>
+
 # 6. 終了
 
 - Raspbianをシャットダウンする。
