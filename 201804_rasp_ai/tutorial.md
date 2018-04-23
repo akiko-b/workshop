@@ -46,14 +46,16 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 2.1. ストリーミング配信プログラム(mjpg-streamer)のインストール
 
-Pi Cameraがアクティブになっているか確認する。
+1. Pi Cameraがアクティブになっているか確認する。
 
 
     vcgencmd get_camera
 
 正しく動いていれば`supported=1 detected=1`という結果が返ってくる。
 
-- Raspbianのパッケージをアップデートする
+
+
+1. Raspbianのパッケージをアップデートする
 
 
     sudo apt-get update
@@ -75,7 +77,7 @@ Pi Cameraがアクティブになっているか確認する。
 
 
 
-- ストリーミング配信プログラム(mjpg-streamer)をインストールする。
+1. ストリーミング配信プログラム(mjpg-streamer)をインストールする。
 
 
     sudo apt-get install -y libjpeg9-dev cmake
