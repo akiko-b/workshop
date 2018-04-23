@@ -46,7 +46,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 2.1. ストリーミング配信プログラム(mjpg-streamer)のインストール
 
-- Pi Cameraがアクティブになっているか確認する。
+Pi Cameraがアクティブになっているか確認する。
 
 
     vcgencmd get_camera
