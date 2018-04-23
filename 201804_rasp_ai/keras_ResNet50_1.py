@@ -21,4 +21,4 @@ def predict(filename, featuresize):
 #画像を判定
 results = predict(args[1], 3)
 for result in results:
-    print("[Score] {}, [Label] {}".format(result[2], result[1]))
+    print("[Score] {}, [Label] {}".format(round(result[2]*100, 2), "%" ), result[1]))

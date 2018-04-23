@@ -35,7 +35,6 @@ Raspberry Pi本体には電源スイッチはありません。電源をつな�
 
 - ターミナルで下記コマンドを実行し、IPアドレスを確認する。
 
-
     ip a
 
 
@@ -49,21 +48,6 @@ Raspberry Pi本体には電源スイッチはありません。電源をつな�
 
 
 「192.168.209」の部分は社内の環境に合わせています。
-
-<br>
-<br>
-- 複数のRaspberry Piを使う場合は個体の特定が必要。下記コマンドでRaspberry Pi本体の赤色LEDを点滅させ、上記で調べたIPアドレスと突き合わせることで本体のMACアドレスを把握することができる。
-
-
-    echo heartbeat | sudo tee /sys/class/leds/led1/trigger
-
-
-特定できたら下記コマンドで元の状態に戻しておく。
-
-
-    echo input | sudo tee /sys/class/leds/led1/trigger
-
-
 
 <br>
 

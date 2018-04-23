@@ -2,13 +2,16 @@
 
 ## 0.1. Raspbianをインストール
 
+下記のOSイメージをダウンロードし、SDカードにコピーする。
+
+[RASPBIAN STRETCH WITH DESKTOP](https://www.raspberrypi.org/downloads/raspbian/)
+
+OSイメージ書き込みツール --> [Etcher](https://etcher.io/)
+
 Raspbianは Raspberry Piに対応したOS。Debianベース。
 ※Debian：Linuxディストリビューションのひとつ
 
-今回使用する機材ではSDカードにプレインストールされています。
-
-
-[RASPBIAN STRETCH WITH DESKTOP](https://www.raspberrypi.org/downloads/raspbian/)
+>2018/04/28の勉強会では、2018-03-13 ReleaseのRaspbianを使っています。
 
 
 ## 0.2. USB-シリアル変換ケーブル用ドライバーをインストール

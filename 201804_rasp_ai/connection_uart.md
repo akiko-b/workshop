@@ -8,6 +8,7 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 という行を追記する。
 
 <br>
+
 ## 1.2. USB-シリアルケーブルの接続
 
 **ラズパイ側**
@@ -37,11 +38,13 @@ SDカードをPCのSDカードリーダーで開き、`boot`ドライブ直下�
 <img src="image/port.PNG" width="80%">
 
 <br>
+
 - PC上のターミナルソフトを開き、シリアル通信のポート番号を選択する。
 
 <img src="image/TeraTerm1.PNG" width="60%">
 
 <br>
+
 - Setup -> Serial port：　ボーレートを115200に設定する。
 
 <img src="image/TeraTerm2.PNG" width="60%">
