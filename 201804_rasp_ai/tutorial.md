@@ -46,7 +46,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 2.1. ストリーミング配信プログラム(mjpg-streamer)のインストール
 
-Pi Cameraがアクティブになっているか確認する。
+### Pi Cameraがアクティブになっているか確認する。
 
     vcgencmd get_camera
 
@@ -54,7 +54,7 @@ Pi Cameraがアクティブになっているか確認する。
 
 
 
-Raspbianのパッケージをアップデートする
+### Raspbianのパッケージをアップデートする
 
     sudo apt-get update
     sudo apt-get upgrade
@@ -62,20 +62,20 @@ Raspbianのパッケージをアップデートする
 
 
 
-    | コマンド | 説明 |
-    |:-------------:|:--------------|
-    | sudo | 「スーパーユーザー（rootユーザー）」の権限が必要なコマンドを実行することができる。 |
-    | apt-get | Debian系のディストリビューションのパッケージ管理システムであるAPTライブラリを利用してパッケージを操作・管理するコマンド。 |
-    | git clone | gitはバージョン管理システム。既存のリポジトリの複製を作る。 |
-    | cd | ディレクトリを移動する。 |
-    | wget | 指定したURLのファイルをダウンロードする。 |
-    | pip3 | pipはPythonのパッケージをインストール・管理するためのパッケージ管理システム |
-    | python3 | pythonを実行する。 |
+| コマンド | 説明 |
+|:-------------:|:--------------|
+| sudo | 「スーパーユーザー（rootユーザー）」の権限が必要なコマンドを実行することができる。 |
+| apt-get | Debian系のディストリビューションのパッケージ管理システムであるAPTライブラリを利用してパッケージを操作・管理するコマンド。 |
+| git clone | gitはバージョン管理システム。既存のリポジトリの複製を作る。 |
+| cd | ディレクトリを移動する。 |
+| wget | 指定したURLのファイルをダウンロードする。 |
+| pip3 | pipはPythonのパッケージをインストール・管理するためのパッケージ管理システム |
+| python3 | pythonを実行する。 |
 
 
 
 
-ストリーミング配信プログラム(mjpg-streamer)をインストールする。
+### ストリーミング配信プログラム(mjpg-streamer)をインストールする。
 
     sudo apt-get install -y libjpeg9-dev cmake
     sudo git clone https://github.com/jacksonliam/mjpg-streamer.git mjpg-streamer
