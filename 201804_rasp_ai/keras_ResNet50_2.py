@@ -23,6 +23,6 @@ while True:
 
     print('***********************************')
     for p in decode_predictions(preds, top=5)[0]:
-            print("[Score] {}, [Label] {}".format(p[2], p[1]))
+            print("[Score] {} %, [Label] {}".format(round(p[2]*100, 2), p[1]))
     time.sleep(3)
     #count = 0
