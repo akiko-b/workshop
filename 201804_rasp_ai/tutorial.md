@@ -46,36 +46,33 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 2.1. ストリーミング配信プログラム(mjpg-streamer)のインストール
 
-### Pi Cameraがアクティブになっているか確認する。
+#### 1. Pi Cameraがアクティブになっているか確認する。
 
     vcgencmd get_camera
 
 正しく動いていれば`supported=1 detected=1`という結果が返ってくる。
 
+<br>
 
-
-### Raspbianのパッケージをアップデートする
+#### 2. Raspbianのパッケージをアップデートする。
 
     sudo apt-get update
     sudo apt-get upgrade
 
 
-
-
 | コマンド | 説明 |
 |:-----------------:|:----------|
 | sudo | 「スーパーユーザー（rootユーザー）」の権限が必要なコマンドを実行することができる。 |
-| apt-get | Debian系のディストリビューションのパッケージ管理システムであるAPTライブラリを利用してパッケージを操作・管理するコマンド。 |
+| apt-get | APTはDebian系のディストリビューションのパッケージ管理システム |
 | git clone | gitはバージョン管理システム。既存のリポジトリの複製を作る。 |
 | cd | ディレクトリを移動する。 |
 | wget | 指定したURLのファイルをダウンロードする。 |
 | pip3 | pipはPythonのパッケージをインストール・管理するためのパッケージ管理システム |
 | python3 | pythonを実行する。 |
 
+<br>
 
-
-
-### ストリーミング配信プログラム(mjpg-streamer)をインストールする。
+#### 3. ストリーミング配信プログラム(mjpg-streamer)をインストールする。
 
     sudo apt-get install -y libjpeg9-dev cmake
     sudo git clone https://github.com/jacksonliam/mjpg-streamer.git mjpg-streamer
@@ -84,11 +81,18 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
     cd
     sudo mv mjpg-streamer/mjpg-streamer-experimental /opt/mjpg-streamer
 
+
+>`E: Unable to locate package <パッケージ名>`というエラーメッセージが出たときは
+>
+    sudo apt-get update
+>
+>と打ってから、もう一度インストールしてみる。
+
 <br>
 
 ## 2.2. mjpg-streamer起動スクリプトの作成
 
-- `nano start_stream.sh`と打ってnanoエディタを開き、下記の内容をコピーして保存終了する。
+`nano start_stream.sh`と打ってnanoエディタを開き、下記の内容をコピーして保存終了する。
 
     #!/bin/bash
 
@@ -109,28 +113,35 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 </tr>
 </table>
 
-- スクリプトの保存終了後、`chmod 755 start_stream.sh`と打って実行権限を与えておく。
+<br>
+
+スクリプトの保存終了後、`chmod 755 start_stream.sh`と打って実行権限を与えておく。
 
 <br>
 
 ## 2.3. mjpg-streamerの動作確認
 
-- 下記コマンドを実行し、mjpg-streamerを起動する。
+下記コマンドを実行し、mjpg-streamerを起動する。
 
     ./start_stream.sh
 
-- （USB-シリアルケーブルで接続している場合）下記コマンドを実行し、ラズパイのIPアドレスを確認する。
+<br>
+
+（USB-シリアルケーブルで接続している場合）下記コマンドを実行し、ラズパイのIPアドレスを確認する。
 
     ip a
 
 <img src="image/ip.PNG" width="60%">
 
-- WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスすることでカメラからの配信画像を見ることができる。　例：http://192.168.xx.xx:9000  
+<br>
+
+WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスすることでカメラからの配信画像を見ることができる。　例：http://192.168.xx.xx:9000  
 
 <img src="image/Stream.PNG" width="60%">
 
 <br>
-- mjpg-streamerを終了させたいときは、psコマンドでプロセス番号を調べてkillコマンドで終了させる。
+
+mjpg-streamerを終了させたいときは、psコマンドでプロセス番号を調べてkillコマンドで終了させる。
 
 <img src="image/kill.PNG" width="50%">
 
@@ -139,7 +150,6 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 # 3. MNIST文字認識の実装
 
 ## 3.1. 「ゼロから作るDeep Learning」のサンプルコードの入手
-
 
 <img src="image/DeepLearning.jpg" width="20%">
 
@@ -150,25 +160,36 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 3.2. カメラを使ったMNIST文字認識プログラムの実装
 
-- 下記コマンドを実行し、mjpg-streamerを起動する。
+#### 1. 下記コマンドを実行し、mjpg-streamerを起動する。
 
     ./start_stream.sh
 
-- WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
-　例：http://192.168.xx.xx:9000  
+<br>
 
+#### 2. WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
+例：http://192.168.xx.xx:9000  
 
-- ニューラルネットワークによる推論
+<br>
+
+#### 3. ニューラルネットワークによる推論
 
     cd /home/pi/deep-learning-from-scratch/ch03
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/digit_recognition_NN.py
     python3 digit_recognition_NN.py
 
-- 畳み込みニューラルネットワークによる推論
+
+「Ctl+C」で終了できる。
+
+<br>
+
+#### 4. 畳み込みニューラルネットワークによる推論
 
     cd /home/pi/deep-learning-from-scratch/ch07
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/digit_recognition_CNN.py
     python3 digit_recognition_CNN.py
+
+
+「Ctl+C」で終了できる。
 
 <br>
 
@@ -176,17 +197,21 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 4.1. スワップ領域の拡大
 
-- Kerasのインストールや実行時のメモリ不足を避けるために、OSのスワップ領域を増やす。
+#### 1. Kerasのインストールや実行時のメモリ不足を避けるために、OSのスワップ領域を増やす。
 
     sudo nano /etc/dphys-swapfile
 
 CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
-- ファイルをセーブしてエディタ終了。下記コマンドを実行する。
+<br>
+
+#### 2. ファイルをセーブしてエディタ終了。下記コマンドを実行する。
 
     sudo /etc/init.d/dphys-swapfile restart
 
-- 下記コマンドで確認
+<br>
+
+#### 3. 下記コマンドで確認
 
     free -h
 
@@ -194,16 +219,26 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 ## 4.2. TensorFlowのインストール
 
-- TensorFlowをインストール
-ここではTensorFlowのバージョン1.7.0を使うが、そのままインストールするとnumpyのバージョンが1.14のものが一緒にインストールされる。
-・・・が、1.14だとTensorFlowを使うときにエラーになってしまうので、バージョン1.13.3のnumpyをインストールしておく。
-（TensorFlowのインストール後にnumpyバージョン1.13.3をインストールする順番でもOK）
-
     cd
     sudo apt-get install libblas-dev liblapack-dev python3-dev libatlas-base-dev gfortran python3-setuptools
     sudo pip3 install numpy==1.13.3
     wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v1.7.0/tensorflow-1.7.0-cp35-none-linux_armv7l.whl　
     sudo pip3 install tensorflow-1.7.0-cp35-none-linux_armv7l.whl
+
+
+>`sudo pip3～`でのインストール時に
+>`TypeError: unsupported operand type(s) for -=: 'Retry' and 'int'`というエラーメッセージが出たときは
+>
+    wget https://bootstrap.pypa.io/get-pip.py
+    python get-pip.py
+    python3 get-pip.py
+>
+>と打ってから、もう一度インストールしてみる。
+
+<br>
+>ここではTensorFlowのバージョン1.7.0を使うが、そのままインストールするとnumpyのバージョンが1.14のものが一緒にインストールされる。
+>・・・が、1.14だとTensorFlowを使うときにエラーになってしまうので、バージョン1.13.3のnumpyをインストールしておく。
+>（TensorFlowのインストール後にnumpyバージョン1.13.3をインストールする順番でもOK）
 
 <br>
 
@@ -225,50 +260,57 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 ## 4.5. Kerasによる物体識別１
 
-- 物体識別のソースコードをダウンロードする。
-
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/keras_ResNet50_1.py
-
-- 画像データをダウンロードする。
-
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/image/sample/cat.jpg
-    wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/image/sample/cat.jpg
-
-- プログラムを実行する。
-
+    wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/image/sample/dog.jpg
     python3 keras_ResNet50_1.py cat.jpg
+    python3 keras_ResNet50_1.py dog.jpg
 
 最初の実行時にはDownloading data from..のメッセージとともにh5ファイルとjsonファイルがダウンロードされる。
+「Using TensorFlow backend.」というメッセージが出てから結果が出るまでに時間がかかる。
+
+
+<img src="image/sample/cat.jpg" width="30%">
+
+<img src="image/sample/dog.jpg" width="30%">
 
 <br>
 
 ## 4.6. Kerasによる物体識別２
 
-- 下記コマンドを実行し、mjpg-streamerを起動する。
+#### 1. 下記コマンドを実行し、mjpg-streamerを起動する。
 
     ./start_stream.sh
 
-- WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
+<br>
+
+#### 2. WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
 　例：http://192.168.xx.xx:9000  
 
+<br>
 
-- 物体識別のソースコードをダウンロードする。
+#### 3. 物体識別のソースコードをダウンロードし、実行する。
 
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/keras_ResNet50_2.py
-
-- プログラムを実行する。
-
     python3 keras_ResNet50_2.py
 
 「Ctl+C」で終了できる。
 
-
 <br>
 
+# 5. 終了
 
-# 5. OpenCV + SSD_Kerasによる物体検出の実装
+Raspbianをシャットダウンする。
 
-## 5.1. OpenCVのインストール
+    sudo shutdown -h now
+
+SDカードのアクセス(緑LED点灯)が消えたら、電源を切る。
+
+
+# 特別編
+# 6. OpenCV + SSD_Kerasによる物体検出の実装
+
+## 6.1. OpenCVのインストール
 
     sudo pip3 install opencv-python
     sudo apt-get install libjasper-dev libqt4-dev
@@ -277,7 +319,7 @@ pythonで`import cv2`して確認。
 
 <br>
 
-## 5.2. raspicam_cvのインストール
+## 6.2. raspicam_cvのインストール
 raspicam_cvライブラリを使用すると、OpenCVから簡単にRaspberryPiカメラモジュールを使用できます。
 
     sudo apt-get install gcc g++ libx11-dev libxt-dev libxext-dev libgraphicsmagick1-dev libcv-dev libhighgui-dev
@@ -297,68 +339,95 @@ raspicam_cvライブラリを使用すると、OpenCVから簡単にRaspberryPi�
 
 <br>
 
-## 5.3. ssd_kerasのインストール
+## 6.3. ssd_kerasのインストール
+ssd_kerasは映像からの物体検出を可能とするライブラリー群になります。
+
+
+    cd
+    git clone https://github.com/rykov8/ssd_keras.git
+    cd ssd_keras
 
 
 
+    学習済みモデルのインストール
+    http://ai-coordinator.jp/ssd_keras-ubuntu#i-3
+    weights_SSD300.hdf5をダウンロード（Windows上）
+    ↓
+    /home/pi/ssd_kerasに移動
+
+> 参考サイト　http://ai-coordinator.jp/ssd_keras-ubuntu#i-3
 
 
-## 5.4. jupyter notebookのインストール
+ssd.pyをインストール
+
+    cd
+    cd ssd_keras
+    wget https://gist.githubusercontent.com/anonymous/4c3105119a233cb33926651c3ea1966c/raw/81665eb0729ceba58d3b0b8fe16f6a5e94d91ab4/ssd.py
 
 
-## 5.5. サンプルソース実行
 
-## 5.6. リアルタイム物体検出
+    nano ssd_layers.py
+ssd_layers.pyの`get_output_shape_for`を`compute_output_shape`に置換
+Ctl+&yen;で置換
 
-分類できるクラスは以下の通り
+> 参考サイト　http://d.hatena.ne.jp/natsutan/20170318/1489851945
 
-・飛行機
+## 6.4. 物体検出用プログラムをダウンロード
 
-・自転車
-
-・鳥
-
-・ボート
-
-・ボトル
-
-・バス
-
-・車
-
-・猫
-
-・椅子
-
-・牛
-
-・ダイニングテーブル
-
-・犬
-
-・馬
-
-・バイク
-
-・人
-
-・鉢植え
-
-・羊
-
-・ソファー
-
-・電車
-
-・TVモニター
+    cd
+    cd ssd_keras/testing_utils
+    mv videotest.py videotest_bk.py
+    wget　https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/videotest.py
+    wget　https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/stream_test.py
 
 
 <br>
 
-# 6. 終了
+## 6.5. リアルタイム物体検出
 
-- Raspbianをシャットダウンする。
+- 一旦RaspberryPiの電源を切って、
+  - ディスプレイとHDMI接続
+  - キーボードとマウスをUSB接続
+して、電源を入れます。
 
-    sudo shutdown -h now
+- ここでは「mjpg-streamer」は使わないので立ち上げないようにしてください。
 
-- SDカードのアクセス(緑LED点灯)が消えたら、電源を切る。
+- 下記の作業はTeraTermではなくRaspbianのターミナルを使って行います。
+
+    sudo modprobe bcm2835-v4l2　←これやらないと、PiCameraをOpenできない？（https://www.raspberrypi.org/forums/viewtopic.php?t=176697）
+    cd
+    cd ssd_keras/testing_utils
+
+    \# Pi Cameraを使ったリアルタイム動画
+    python3 stream_test.py
+
+    \# フリー動画（001～006.mp4）を使う場合（001.mp4の部分をそれぞれ変えてみてください）
+    wget https://github.com/akiko-b/workshop/blob/master/201804_rasp_ai/image/movie/001.mp4?raw=true
+    python3 stream_test.py 001.mp4
+
+
+- 「Using TensorFlow backend.」というメッセージが出てから結果が出るまでに時間がかかる。
+- 動画が始まったら、「i」キーを押すと、その時点のフレーム画像を使って物体検出される。（長くて18秒くらいかかる）
+- 「q」またはターミナル上で「Ctl+C」で終了できる。
+
+
+
+分類できるクラスは以下の通り
+
+
+<table>
+<tr>
+  <td>飛行機</td><td>自転車</td><td>鳥</td><td>ボート</td><td>ボトル</td>
+</tr>
+<tr>
+  <td>バス</td><td>車</td><td>猫</td><td>椅子</td><td>牛</td>
+</tr>
+<tr>
+  <td>ダイニングテーブル</td><td>犬</td><td>馬</td><td>バイク</td><td>人</td>
+</tr>
+<tr>
+  <td>鉢植え</td><td>羊</td><td>ソファー</td><td>電車</td><td>TVモニター</td>
+</tr>
+</table>
+
+<br>
