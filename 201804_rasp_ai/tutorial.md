@@ -82,6 +82,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
     sudo mv mjpg-streamer/mjpg-streamer-experimental /opt/mjpg-streamer
 
 
+> メモ
 >`E: Unable to locate package <パッケージ名>`というエラーメッセージが出たときは
 >
     sudo apt-get update
@@ -226,6 +227,7 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
     sudo pip3 install tensorflow-1.7.0-cp35-none-linux_armv7l.whl
 
 
+> メモ
 >`sudo pip3～`でのインストール時に
 >`TypeError: unsupported operand type(s) for -=: 'Retry' and 'int'`というエラーメッセージが出たときは
 >
@@ -236,6 +238,8 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 >と打ってから、もう一度インストールしてみる。
 
 <br>
+
+> メモ
 >ここではTensorFlowのバージョン1.7.0を使うが、そのままインストールするとnumpyのバージョンが1.14のものが一緒にインストールされる。
 >・・・が、1.14だとTensorFlowを使うときにエラーになってしまうので、バージョン1.13.3のnumpyをインストールしておく。
 >（TensorFlowのインストール後にnumpyバージョン1.13.3をインストールする順番でもOK）
@@ -244,8 +248,14 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 ## 4.3. TensorFlow動作テスト
 
-    wget https://raw.githubusercontent.com/yusugomori/deeplearning-tensorflow-keras/master/3/tensorflow/01_logistic_regression_or_tensorflow.py
-    python3 01_logistic_regression_or_tensorflow.py
+    python3
+    import tensorflow as tf
+    hello = tf.constant('Hello, TensorFlow!')
+    sess = tf.Session()
+    print(sess.run(hello))
+
+「Hello, TensorFlow!」と表示されたら動作確認OK。
+「Ctl+D」で終了できる。
 
 <br>
 
@@ -307,20 +317,24 @@ Raspbianをシャットダウンする。
 SDカードのアクセス(緑LED点灯)が消えたら、電源を切る。
 
 
+<br><br>
+
+------------------------------------
 # 特別編
 # 6. OpenCV + SSD_Kerasによる物体検出の実装
 
 ## 6.1. OpenCVのインストール
+OpenCVは画像認識に関連する機能のライブラリ。
 
     sudo pip3 install opencv-python
     sudo apt-get install libjasper-dev libqt4-dev
 
-pythonで`import cv2`して確認。
+pythonで`import cv2`して確認する。
 
 <br>
 
 ## 6.2. raspicam_cvのインストール
-raspicam_cvライブラリを使用すると、OpenCVから簡単にRaspberryPiカメラモジュールを使用できます。
+raspicam_cvライブラリを使用すると、OpenCVからRaspberryPiカメラモジュールを使用できるようになる。
 
     sudo apt-get install gcc g++ libx11-dev libxt-dev libxext-dev libgraphicsmagick1-dev libcv-dev libhighgui-dev
 
@@ -340,35 +354,33 @@ raspicam_cvライブラリを使用すると、OpenCVから簡単にRaspberryPi�
 <br>
 
 ## 6.3. ssd_kerasのインストール
-ssd_kerasは映像からの物体検出を可能とするライブラリー群になります。
-
+ssd_kerasは映像からの物体検出を可能にするライブラリ。(SSD : Single Shot MultiBox Detector)
 
     cd
     git clone https://github.com/rykov8/ssd_keras.git
-    cd ssd_keras
 
 
+#### 学習済みモデルのインストール
+[https://mega.nz/#F!7RowVLCL!q3cEVRK9jyOSB9el3SssIA](https://mega.nz/#F!7RowVLCL!q3cEVRK9jyOSB9el3SssIA)からweights_SSD300.hdf5をダウンロードする。
 
-    学習済みモデルのインストール
-    http://ai-coordinator.jp/ssd_keras-ubuntu#i-3
-    weights_SSD300.hdf5をダウンロード（Windows上）
-    ↓
-    /home/pi/ssd_kerasに移動
+ダウンロードしたファイルを``/home/pi/ssd_keras``に置く。
 
 > 参考サイト　http://ai-coordinator.jp/ssd_keras-ubuntu#i-3
 
 
-ssd.pyをインストール
+#### ssd.pyをインストール
 
     cd
     cd ssd_keras
     wget https://gist.githubusercontent.com/anonymous/4c3105119a233cb33926651c3ea1966c/raw/81665eb0729ceba58d3b0b8fe16f6a5e94d91ab4/ssd.py
 
 
+#### ssd_layers.pyを編集
 
     nano ssd_layers.py
-ssd_layers.pyの`get_output_shape_for`を`compute_output_shape`に置換
-Ctl+&yen;で置換
+
+ssd_layers.pyの`get_output_shape_for`を`compute_output_shape`に置換する。
+Ctl+&yen;で置換できる。
 
 > 参考サイト　http://d.hatena.ne.jp/natsutan/20170318/1489851945
 
@@ -385,6 +397,8 @@ Ctl+&yen;で置換
 
 ## 6.5. リアルタイム物体検出
 
+#### 準備
+
 - 一旦RaspberryPiの電源を切って、
   - ディスプレイとHDMI接続
   - キーボードとマウスをUSB接続
@@ -393,6 +407,9 @@ Ctl+&yen;で置換
 - ここでは「mjpg-streamer」は使わないので立ち上げないようにしてください。
 
 - 下記の作業はTeraTermではなくRaspbianのターミナルを使って行います。
+
+
+#### 実行
 
     sudo modprobe bcm2835-v4l2　←これやらないと、PiCameraをOpenできない？（https://www.raspberrypi.org/forums/viewtopic.php?t=176697）
     cd
@@ -410,10 +427,7 @@ Ctl+&yen;で置換
 - 動画が始まったら、「i」キーを押すと、その時点のフレーム画像を使って物体検出される。（長くて18秒くらいかかる）
 - 「q」またはターミナル上で「Ctl+C」で終了できる。
 
-
-
-分類できるクラスは以下の通り
-
+- 分類できるクラスは以下の通り
 
 <table>
 <tr>
