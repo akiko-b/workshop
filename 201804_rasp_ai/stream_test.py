@@ -6,11 +6,12 @@ import sys
 sys.path.append("..")
 from ssd import SSD300 as SSD
 
+args = sys.argv
+
 input_shape = (300,300,3)
 
 # Change this if you run with other classes than VOC
-# class_names = ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"];
-class_names = ["バックグラウンド", "飛行機", "自転車", "鳥", "ボート", "ボトル", "バス", "車", "猫", "椅子", "牛", "ダイニングテーブル", "犬", "馬", "バイク", "人", "鉢植え", "羊", "ソファー", "電車", "TVモニター"];
+class_names = ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"];
 NUM_CLASSES = len(class_names)
 
 model = SSD(input_shape, num_classes=NUM_CLASSES)
@@ -23,10 +24,13 @@ vid_test = VideoTest(class_names, model, input_shape)
 # To test on webcam 0, remove the parameter (or change it to another number
 # to test on that webcam)
 
-# 20180420変更　まだ試していない******************************
 # vid_test.run('http://localhost:9000/?action=stream')
-vid_test.run()
-# 20180420変更　まだ試していない******************************
+# vid_test.run(args[1])
+
+if len(args) > 1:
+    vid_test.run(args[1])
+else:
+    vid_test.run(-1)
 
 
 

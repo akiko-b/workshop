@@ -4,6 +4,9 @@ from keras.applications.resnet50 import preprocess_input, decode_predictions
 import numpy as np
 import sys, os, time, subprocess, pickle
 
+#バックエンドをインポート
+from keras.backend import tensorflow_backend as backend
+
 model = ResNet50(weights='imagenet')
 devnull = open('os.devnull', 'w')
 ipaddr = subprocess.check_output(["hostname", "-I"]).decode("utf-8").strip()
@@ -26,3 +29,6 @@ while True:
             print("[Score] {} %, [Label] {}".format(round(p[2]*100, 2), p[1]))
     time.sleep(3)
     #count = 0
+
+#処理終了時に下記をコール
+backend.clear_session()

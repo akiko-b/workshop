@@ -4,6 +4,9 @@ from keras.applications.resnet50 import preprocess_input, decode_predictions
 import numpy as np
 import sys
 
+#バックエンドをインポート
+from keras.backend import tensorflow_backend as backend
+
 args = sys.argv
 
 #学習済みモデルResNet50の読込
@@ -22,3 +25,7 @@ def predict(filename, featuresize):
 results = predict(args[1], 3)
 for result in results:
     print("[Score] {} %, [Label] {}".format(round(result[2]*100, 2), result[1]))
+
+
+#処理終了時に下記をコール
+backend.clear_session()
