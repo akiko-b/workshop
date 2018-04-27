@@ -202,8 +202,8 @@ class VideoTest(object):
             if key == ord('q'): break
 
 
-        vid.release()
-        cv2.destroyAllWindows()
-
         #処理終了時に下記をコール
         backend.clear_session()
+
+        vid.release()
+        cv2.destroyAllWindows()

@@ -273,6 +273,7 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 ## 4.5. Kerasによる物体識別１
 
+    cd
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/keras_ResNet50_1.py
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/image/sample/cat.jpg
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/image/sample/dog.jpg
@@ -293,6 +294,7 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 #### 下記コマンドを実行し、mjpg-streamerを起動する。
 
+    cd
     ./start_stream.sh
 
 <br>
@@ -389,6 +391,7 @@ ssd_kerasは映像からの物体検出を可能にするライブラリ。(SSD 
 
     cd
     cd ssd_keras
+    rm ssd.py
     wget https://gist.githubusercontent.com/anonymous/4c3105119a233cb33926651c3ea1966c/raw/81665eb0729ceba58d3b0b8fe16f6a5e94d91ab4/ssd.py
 
 
@@ -408,8 +411,8 @@ Ctl+&yen;で置換できる。
     cd
     cd ssd_keras/testing_utils
     mv videotest.py videotest_bk.py
-    wget　https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/videotest.py
-    wget　https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/stream_test.py
+    wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/videotest.py
+    wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/stream_test.py
 
 
 <br>
@@ -440,7 +443,7 @@ Ctl+&yen;で置換できる。
     python3 stream_test.py
 
 ##### フリー動画（001～006.mp4）を使う場合（「001.mp4」の部分をそれぞれ変えてみてください）
-    wget https://github.com/akiko-b/workshop/blob/master/201804_rasp_ai/image/movie/001.mp4?raw=true
+    wget https://github.com/akiko-b/workshop/raw/master/201804_rasp_ai/image/movie/001.mp4
     python3 stream_test.py 001.mp4
 
 
