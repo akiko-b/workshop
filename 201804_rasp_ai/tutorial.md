@@ -31,12 +31,11 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 と打って設定画面に入り、以下の設定を行う。
 
-- Network Options -> Wi-fi -> 無線LANのSSID/passphraseを設定
-- Interfacing Options -> SSH -> (Would you line the SSH...) -> Yes
+- Network Options -> Wi-fi -> 無線LANのSSID/passphraseを設定　（1.2.で無線LAN接続の設定をした場合は不要）
+- Interfacing Options -> SSH -> (Would you line the SSH...) -> Yes　（1.2.で無線LAN接続の設定をした場合は不要）
 - Localisation Options -> Change Timezone -> Asia -> Tokyo
 
-(カメラモジュールの有効化 )
-- Interfacing Options -> Camera -> (Would you like the camera...) -> Yes  
+- Interfacing Options -> Camera -> (Would you like the camera...) -> Yes 　 (カメラモジュールの有効化)
 
 その後、画面の指示通りrebootする。
 
@@ -83,6 +82,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 
 > メモ
+>
 >`E: Unable to locate package <パッケージ名>`というエラーメッセージが出たときは
 >
     sudo apt-get update
@@ -223,11 +223,12 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
     cd
     sudo apt-get install libblas-dev liblapack-dev python3-dev libatlas-base-dev gfortran python3-setuptools
     sudo pip3 install numpy==1.13.3
-    wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v1.7.0/tensorflow-1.7.0-cp35-none-linux_armv7l.whl　
+    wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v1.7.0/tensorflow-1.7.0-cp35-none-linux_armv7l.whl
     sudo pip3 install tensorflow-1.7.0-cp35-none-linux_armv7l.whl
 
 
 > メモ
+>
 >`sudo pip3～`でのインストール時に
 >`TypeError: unsupported operand type(s) for -=: 'Retry' and 'int'`というエラーメッセージが出たときは
 >
@@ -240,6 +241,7 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 <br>
 
 > メモ
+>
 >ここではTensorFlowのバージョン1.7.0を使うが、そのままインストールするとnumpyのバージョンが1.14のものが一緒にインストールされる。
 >・・・が、1.14だとTensorFlowを使うときにエラーになってしまうので、バージョン1.13.3のnumpyをインストールしておく。
 >（TensorFlowのインストール後にnumpyバージョン1.13.3をインストールする順番でもOK）
@@ -249,13 +251,14 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 ## 4.3. TensorFlow動作テスト
 
     python3
+    （以下はPythonのインタプリタで）
     import tensorflow as tf
     hello = tf.constant('Hello, TensorFlow!')
     sess = tf.Session()
     print(sess.run(hello))
 
-「Hello, TensorFlow!」と表示されたら動作確認OK。
-「Ctl+D」で終了できる。
+- 「Hello, TensorFlow!」と表示されたら動作確認OK。
+- 「Ctl+D」で終了できる。
 
 <br>
 
@@ -276,8 +279,8 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
     python3 keras_ResNet50_1.py cat.jpg
     python3 keras_ResNet50_1.py dog.jpg
 
-最初の実行時にはDownloading data from..のメッセージとともにh5ファイルとjsonファイルがダウンロードされる。
-「Using TensorFlow backend.」というメッセージが出てから結果が出るまでに時間がかかる。
+- 最初の実行時にはDownloading data from..のメッセージとともにh5ファイルとjsonファイルがダウンロードされる。
+- 「Using TensorFlow backend.」というメッセージが出てから結果が出るまでに時間がかかる。
 
 
 <img src="image/sample/cat.jpg" width="30%">
@@ -323,13 +326,25 @@ SDカードのアクセス(緑LED点灯)が消えたら、電源を切る。
 # 特別編
 # 6. OpenCV + SSD_Kerasによる物体検出の実装
 
+<table>
+<tr><td>
+<b>追加で用意するもの</b><br>
+・ディスプレイ（HDMI端子があるもの）<br>
+・HDMIケーブル<br>
+・キーボード（USB接続）<br>
+・マウス（USB接続）<br>
+</td></tr>
+</table>
+
+<br>
+
 ## 6.1. OpenCVのインストール
 OpenCVは画像認識に関連する機能のライブラリ。
 
     sudo pip3 install opencv-python
     sudo apt-get install libjasper-dev libqt4-dev
 
-pythonで`import cv2`して確認する。
+pythonで`import cv2`して動作確認する。
 
 <br>
 
@@ -359,14 +374,16 @@ ssd_kerasは映像からの物体検出を可能にするライブラリ。(SSD 
     cd
     git clone https://github.com/rykov8/ssd_keras.git
 
+<br>
 
 #### 学習済みモデルのインストール
-[https://mega.nz/#F!7RowVLCL!q3cEVRK9jyOSB9el3SssIA](https://mega.nz/#F!7RowVLCL!q3cEVRK9jyOSB9el3SssIA)からweights_SSD300.hdf5をダウンロードする。
+- [https://mega.nz/#F!7RowVLCL!q3cEVRK9jyOSB9el3SssIA](https://mega.nz/#F!7RowVLCL!q3cEVRK9jyOSB9el3SssIA)からweights_SSD300.hdf5をダウンロードする。
 
-ダウンロードしたファイルを``/home/pi/ssd_keras``に置く。
+- ダウンロードしたファイルを``/home/pi/ssd_keras``に置く。
 
 > 参考サイト　http://ai-coordinator.jp/ssd_keras-ubuntu#i-3
 
+<br>
 
 #### ssd.pyをインストール
 
@@ -384,6 +401,8 @@ Ctl+&yen;で置換できる。
 
 > 参考サイト　http://d.hatena.ne.jp/natsutan/20170318/1489851945
 
+<br>
+
 ## 6.4. 物体検出用プログラムをダウンロード
 
     cd
@@ -399,26 +418,28 @@ Ctl+&yen;で置換できる。
 
 #### 準備
 
-- 一旦RaspberryPiの電源を切って、
-  - ディスプレイとHDMI接続
-  - キーボードとマウスをUSB接続
-して、電源を入れます。
+- ここから先の作業はTeraTermではなくRaspbianのターミナルを使って行います。
 
-- ここでは「mjpg-streamer」は使わないので立ち上げないようにしてください。
+- 一旦RaspberryPiの電源を切って、ディスプレイ、キーボード、マウスを接続し、電源を入れます。
 
-- 下記の作業はTeraTermではなくRaspbianのターミナルを使って行います。
+- ここでは「mjpg-streamer」は立ち上げないようにしてください。
+
+
 
 
 #### 実行
 
-    sudo modprobe bcm2835-v4l2　←これやらないと、PiCameraをOpenできない？（https://www.raspberrypi.org/forums/viewtopic.php?t=176697）
+    sudo modprobe bcm2835-v4l2
     cd
     cd ssd_keras/testing_utils
 
-    \# Pi Cameraを使ったリアルタイム動画
+
+> 参考サイト　https://www.raspberrypi.org/forums/viewtopic.php?t=176697
+
+##### Pi Cameraを使ったリアルタイム動画
     python3 stream_test.py
 
-    \# フリー動画（001～006.mp4）を使う場合（001.mp4の部分をそれぞれ変えてみてください）
+##### フリー動画（001～006.mp4）を使う場合（「001.mp4」の部分をそれぞれ変えてみてください）
     wget https://github.com/akiko-b/workshop/blob/master/201804_rasp_ai/image/movie/001.mp4?raw=true
     python3 stream_test.py 001.mp4
 
