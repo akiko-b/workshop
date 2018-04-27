@@ -7,9 +7,6 @@ import numpy as np
 from common.functions import sigmoid, softmax
 from PIL import Image
 
-#バックエンドをインポート
-from keras.backend import tensorflow_backend as backend
-
 # 学習済みの重みパラメータを読み込む
 def init_network():
     with open("sample_weight.pkl", 'rb') as f:
@@ -80,7 +77,3 @@ while True:
     y_idx = np.argsort(y) #並び替え
     for i in range(10):
         print(y_idx[9-i], ":", round( y[y_idx[9-i]]*100, 2), "%" )
-
-
-#処理終了時に下記をコール
-backend.clear_session()

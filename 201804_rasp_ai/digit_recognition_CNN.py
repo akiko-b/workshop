@@ -7,9 +7,6 @@ from common.layers import *
 from simple_convnet import SimpleConvNet
 from PIL import Image
 
-#バックエンドをインポート
-from keras.backend import tensorflow_backend as backend
-
 # 畳み込みネットワークの読み込みと、学習済パラメータの読み込み
 network = SimpleConvNet()
 network.load_params("params.pkl")
@@ -56,7 +53,3 @@ while True:
     y_idx = np.argsort(y)
     for i in range(10):
         print(y_idx[9-i], ":", round( y[y_idx[9-i]]*100, 2), "%" )
-
-
-#処理終了時に下記をコール
-backend.clear_session()

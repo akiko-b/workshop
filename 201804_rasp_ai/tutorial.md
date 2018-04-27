@@ -45,7 +45,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 ## 2.1. ストリーミング配信プログラム(mjpg-streamer)のインストール
 
-#### 1. Pi Cameraがアクティブになっているか確認する。
+#### Pi Cameraがアクティブになっているか確認する。
 
     vcgencmd get_camera
 
@@ -53,7 +53,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 <br>
 
-#### 2. Raspbianのパッケージをアップデートする。
+#### Raspbianのパッケージをアップデートする。
 
     sudo apt-get update
     sudo apt-get upgrade
@@ -71,7 +71,7 @@ HDMIポート側が銀色、イーサネットポート側が青色になるよ�
 
 <br>
 
-#### 3. ストリーミング配信プログラム(mjpg-streamer)をインストールする。
+#### ストリーミング配信プログラム(mjpg-streamer)をインストールする。
 
     sudo apt-get install -y libjpeg9-dev cmake
     sudo git clone https://github.com/jacksonliam/mjpg-streamer.git mjpg-streamer
@@ -161,18 +161,18 @@ mjpg-streamerを終了させたいときは、psコマンドでプロセス番�
 
 ## 3.2. カメラを使ったMNIST文字認識プログラムの実装
 
-#### 1. 下記コマンドを実行し、mjpg-streamerを起動する。
+#### 下記コマンドを実行し、mjpg-streamerを起動する。
 
     ./start_stream.sh
 
 <br>
 
-#### 2. WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
+#### WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
 例：http://192.168.xx.xx:9000  
 
 <br>
 
-#### 3. ニューラルネットワークによる推論
+#### ニューラルネットワークによる推論
 
     cd /home/pi/deep-learning-from-scratch/ch03
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/digit_recognition_NN.py
@@ -183,7 +183,7 @@ mjpg-streamerを終了させたいときは、psコマンドでプロセス番�
 
 <br>
 
-#### 4. 畳み込みニューラルネットワークによる推論
+#### 畳み込みニューラルネットワークによる推論
 
     cd /home/pi/deep-learning-from-scratch/ch07
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/digit_recognition_CNN.py
@@ -198,7 +198,7 @@ mjpg-streamerを終了させたいときは、psコマンドでプロセス番�
 
 ## 4.1. スワップ領域の拡大
 
-#### 1. Kerasのインストールや実行時のメモリ不足を避けるために、OSのスワップ領域を増やす。
+#### Kerasのインストールや実行時のメモリ不足を避けるために、OSのスワップ領域を増やす。
 
     sudo nano /etc/dphys-swapfile
 
@@ -206,13 +206,13 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 <br>
 
-#### 2. ファイルをセーブしてエディタ終了。下記コマンドを実行する。
+#### ファイルをセーブしてエディタ終了。下記コマンドを実行する。
 
     sudo /etc/init.d/dphys-swapfile restart
 
 <br>
 
-#### 3. 下記コマンドで確認
+#### 下記コマンドで確認
 
     free -h
 
@@ -291,18 +291,18 @@ CONF_SWAPSIZE=100の箇所の数字を2048に変更する。
 
 ## 4.6. Kerasによる物体識別２
 
-#### 1. 下記コマンドを実行し、mjpg-streamerを起動する。
+#### 下記コマンドを実行し、mjpg-streamerを起動する。
 
     ./start_stream.sh
 
 <br>
 
-#### 2. WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
+#### WEBブラウザでラズパイのIPアドレス、ポート9000番にアクセスする。
 　例：http://192.168.xx.xx:9000  
 
 <br>
 
-#### 3. 物体識別のソースコードをダウンロードし、実行する。
+#### 物体識別のソースコードをダウンロードし、実行する。
 
     wget https://raw.githubusercontent.com/akiko-b/workshop/master/201804_rasp_ai/keras_ResNet50_2.py
     python3 keras_ResNet50_2.py
